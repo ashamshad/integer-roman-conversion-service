@@ -3,6 +3,8 @@ package com.interview.integerromanconversion.controller;
 import com.interview.integerromanconversion.converter.IntegerToRomanConverter;
 import com.interview.integerromanconversion.converter.RomanToIntegerConverter;
 import com.interview.integerromanconversion.domain.ConvertResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.validation.annotation.Validated;
@@ -16,6 +18,9 @@ import javax.validation.constraints.Pattern;
 @Validated
 @RestController
 public class ConvertController {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	private Converter<Integer, String> integerToRomanConverter;
 	private Converter<String, Integer> romanToIntegerConverter;
 
@@ -32,7 +37,7 @@ public class ConvertController {
 			@RequestParam("integer")
 			@Max(3999)
 			Integer integer) {
-		System.out.println(integer + " to be converted");
+		logger.info(integer + " to be converted");
 		return this.integerToRomanConverter.convert(integer);
 	}
 
@@ -41,7 +46,7 @@ public class ConvertController {
 			@RequestParam
 			@Pattern(regexp = "^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$")
 			String text) {
-		System.out.println(text + " to be converted");
+		logger.info(text + " to be converted");
 		Integer convertedInteger = this.romanToIntegerConverter.convert(text);
 		return new ConvertResponse(String.valueOf(convertedInteger));
 	}

@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -59,9 +58,14 @@ public class ConvertControllerTest {
     }
 
     @Test
-    public void convertRoman_nominalScenario_returnsConvertedRoman() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=10").accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.result", equalTo("0")));
+    public void convertRoman_invalidRomanCharacter_returnsBadRequest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=ZZZ").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void convertRoman_invalidRepetitionOfRomanCharacters_returnsBadRequest() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=MMMM").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 }
