@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class ConversionServiceTest {
+class IntegerToRomanConverterTest {
 
     @Test
     public void integerToRoman_singleDigit_returnsRoman() {
