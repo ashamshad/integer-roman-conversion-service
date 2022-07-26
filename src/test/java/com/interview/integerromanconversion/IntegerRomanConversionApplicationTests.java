@@ -1,10 +1,10 @@
-package com.interview.integerromanconversionservice;
+package com.interview.integerromanconversion;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class IntegerRomanConversionServiceApplicationTests {
+class IntegerRomanConversionApplicationTests {
 
 	@Test
 	void contextLoads() {
