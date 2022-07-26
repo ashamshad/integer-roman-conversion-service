@@ -53,6 +53,12 @@ public class ConvertControllerTest {
     }
 
     @Test
+    public void convertInteger_invalidInteger_returnsError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=1000000").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
     public void convertRoman_nominalScenario_returnsConvertedRoman() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=10").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
