@@ -20,9 +20,9 @@ public class ConvertControllerTest {
     private MockMvc mvc;
 
     @Test
-    public void convertInteger_nominalScenario_returnsConvertedText() throws Exception {
+    public void convertInteger_nominalScenario_returnsConvertedInteger() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=10").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(content().string(equalTo("roman")));
+                .andExpect(content().string(equalTo("X")));
     }
 }
