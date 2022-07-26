@@ -18,4 +18,17 @@ class ConversionServiceTest {
         //THEN
         assertEquals("I", roman);
     }
+
+    @Test
+    public void integerToRoman_doubleDigit_returnsRoman() {
+        //GIVEN
+        int testInt = 13;
+
+        //WHEN
+        ConversionService conversionService = new ConversionService();
+        String roman = conversionService.integerToRoman(testInt);
+
+        //THEN
+        assertEquals("XIII", roman);
+    }
 }
