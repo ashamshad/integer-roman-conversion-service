@@ -2,6 +2,7 @@ package com.interview.integerromanconversion.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interview.integerromanconversion.converter.IntegerToRomanConverter;
+import com.interview.integerromanconversion.converter.RomanToIntegerConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,8 +15,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -28,6 +31,8 @@ public class ConvertControllerTest {
 
     @MockBean
     private IntegerToRomanConverter integerToRomanConverter;
+    @MockBean
+    private RomanToIntegerConverter romanToIntegerConverter;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -67,5 +72,13 @@ public class ConvertControllerTest {
     public void convertRoman_invalidRepetitionOfRomanCharacters_returnsBadRequest() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=MMMM").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void convertRoman_nominalScenario_returnsConvertedRoman() throws Exception {
+        when(romanToIntegerConverter.convert("M")).thenReturn(0);
+        mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=M").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result", is("0")));
     }
 }
