@@ -8,6 +8,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class ConverterServiceTest {
@@ -21,13 +22,14 @@ class ConverterServiceTest {
     public void convertIntegerToRoman_nominal_returnsRoman() {
         //GIVEN
         int testIntValue = 1;
+        when(integerToRomanConverter.convert(testIntValue)).thenReturn("roman");
 
         //WHEN
         ConverterService converterService = new ConverterService(integerToRomanConverter, romanToIntegerConverter);
         String result = converterService.convertIntegerToRoman(testIntValue);
 
         //THEN
-        assertEquals("", result);
+        assertEquals("roman", result);
     }
 
     @Test

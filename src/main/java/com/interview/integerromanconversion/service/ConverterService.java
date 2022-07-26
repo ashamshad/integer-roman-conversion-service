@@ -21,7 +21,7 @@ public class ConverterService {
     }
 
     public String convertIntegerToRoman(Integer integer) {
-        return "";
+        return this.integerToRomanConverter.convert(integer);
     }
 
     public Integer convertRomanToInteger(String roman) {
