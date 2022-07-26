@@ -75,4 +75,17 @@ class RomanToIntegerConverterTest {
         //THEN
         assertEquals(1650, integer);
     }
+
+    @Test
+    public void convert_maxRomanCharacters_returnsConvertedInt() {
+        //GIVEN
+        String testRomanValue = "MMMCMXCIX";
+
+        //WHEN
+        RomanToIntegerConverter converter = new RomanToIntegerConverter();
+        Integer integer = converter.convert(testRomanValue);
+
+        //THEN
+        assertEquals(3999, integer);
+    }
 }
