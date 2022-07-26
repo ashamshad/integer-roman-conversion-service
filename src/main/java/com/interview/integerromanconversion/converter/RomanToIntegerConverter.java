@@ -1,5 +1,7 @@
 package com.interview.integerromanconversion.converter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
@@ -8,6 +10,8 @@ import java.util.Map;
 
 @Component
 public class RomanToIntegerConverter implements Converter<String, Integer> {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final static Map<Character,Integer> ROMAN_TO_INT_MAP = new HashMap<>();
     static {
@@ -35,10 +39,10 @@ public class RomanToIntegerConverter implements Converter<String, Integer> {
                     result += ROMAN_TO_INT_MAP.get(currentRomanChar);
                 }
             } catch (NullPointerException exception) {
-                System.out.println("Invalid roman character found: " + currentRomanChar);
+                logger.error("Invalid roman character has been found: " + currentRomanChar);
                 throw new IllegalArgumentException(String.format("Roman character %s is not allowed. Characters allowed are: ['M','D','C','L','X','V','I']", currentRomanChar));
             } catch (Exception exception) {
-                System.out.println("Unexpected error occurred while converting roman to integer: " + exception.getMessage());
+                logger.error("Unexpected error occurred while converting roman to integer: " + exception.getMessage());
                 throw exception;
             }
         }
