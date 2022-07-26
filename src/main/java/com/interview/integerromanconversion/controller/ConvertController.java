@@ -1,8 +1,8 @@
 package com.interview.integerromanconversion.controller;
 
 import com.interview.integerromanconversion.domain.ConvertResponse;
-import com.interview.integerromanconversion.service.IntegerToRomanConverter;
-import com.interview.integerromanconversion.service.RomanToIntegerConverter;
+import com.interview.integerromanconversion.converter.IntegerToRomanConverter;
+import com.interview.integerromanconversion.converter.RomanToIntegerConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,5 +1,6 @@
 package com.interview.integerromanconversion.service;
 
+import com.interview.integerromanconversion.converter.IntegerToRomanConverter;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

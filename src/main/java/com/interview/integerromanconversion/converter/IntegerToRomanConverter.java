@@ -1,11 +1,11 @@
-package com.interview.integerromanconversion.service;
+package com.interview.integerromanconversion.converter;
 
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.TreeMap;
 
-@Service
+@Component
 public class IntegerToRomanConverter implements Converter<Integer, String> {
 
     private final static TreeMap<Integer, String> INTEGER_ROMAN_MAP = new TreeMap<>();

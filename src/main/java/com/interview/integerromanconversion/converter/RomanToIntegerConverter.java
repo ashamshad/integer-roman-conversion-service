@@ -1,12 +1,12 @@
-package com.interview.integerromanconversion.service;
+package com.interview.integerromanconversion.converter;
 
 import org.springframework.core.convert.converter.Converter;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
-@Service
+@Component
 public class RomanToIntegerConverter implements Converter<String, Integer> {
 
     private final static Map<Character,Integer> ROMAN_TO_INT_MAP = new HashMap<>();

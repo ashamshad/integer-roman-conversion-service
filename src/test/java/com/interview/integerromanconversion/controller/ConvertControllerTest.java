@@ -1,7 +1,7 @@
 package com.interview.integerromanconversion.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.interview.integerromanconversion.service.IntegerToRomanConverter;
+import com.interview.integerromanconversion.converter.IntegerToRomanConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
