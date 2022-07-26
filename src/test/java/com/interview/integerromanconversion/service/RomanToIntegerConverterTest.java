@@ -49,5 +49,30 @@ class RomanToIntegerConverterTest {
         //THEN
         assertEquals(600, integer);
     }
-    
+
+    @Test
+    public void convert_threeRomanCharacters_returnsConvertedInt() {
+        //GIVEN
+        String testRomanValue = "DIX";
+
+        //WHEN
+        RomanToIntegerConverter converter = new RomanToIntegerConverter();
+        Integer integer = converter.convert(testRomanValue);
+
+        //THEN
+        assertEquals(509, integer);
+    }
+
+    @Test
+    public void convert_fourRomanCharacters_returnsConvertedInt() {
+        //GIVEN
+        String testRomanValue = "MDCL";
+
+        //WHEN
+        RomanToIntegerConverter converter = new RomanToIntegerConverter();
+        Integer integer = converter.convert(testRomanValue);
+
+        //THEN
+        assertEquals(1650, integer);
+    }
 }
