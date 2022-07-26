@@ -1,7 +1,9 @@
 package com.interview.integerromanconversion.controller;
 
 import com.interview.integerromanconversion.service.ConversionService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,11 +27,22 @@ public class ConvertControllerTest {
     @MockBean
     private ConversionService conversionService;
 
+    @BeforeEach
+    public void clear() {
+        Mockito.reset(conversionService);
+    }
+
     @Test
     public void convertInteger_nominalScenario_returnsConvertedInteger() throws Exception {
         when(conversionService.integerToRoman(10)).thenReturn("converted");
         mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=10").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("converted")));
+    }
+
+    @Test
+    public void convertInteger_missingIntegerRequestParameter_returnsError() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/convert/integer").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 }
