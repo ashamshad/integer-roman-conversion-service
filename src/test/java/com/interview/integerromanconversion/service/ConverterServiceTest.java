@@ -36,6 +36,7 @@ class ConverterServiceTest {
     public void convertRomanToInteger_nominal_returnsInteger() {
         //GIVEN
         String testRomanValue = "roman";
+        when(romanToIntegerConverter.convert(testRomanValue)).thenReturn(0);
 
         //WHEN
         ConverterService converterService = new ConverterService(integerToRomanConverter, romanToIntegerConverter);
