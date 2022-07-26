@@ -27,17 +27,29 @@ public class RomanToIntegerConverter implements Converter<String, Integer> {
 
             char currentRomanChar = roman.charAt(i);
 
-            if (i > 0) {
-                char previousRomanChar = roman.charAt(i);
-                // If the previous character is greater than the current one
-                if (ROMAN_TO_INT_MAP.get(currentRomanChar) > ROMAN_TO_INT_MAP.get(previousRomanChar)) {
-                    result += ROMAN_TO_INT_MAP.get(currentRomanChar) - 2 * ROMAN_TO_INT_MAP.get(previousRomanChar);
+            try {
+                if (i > 0) {
+                    char previousRomanChar = roman.charAt(i);
+                    // If the previous character is greater than the current one
+                    if (isRomanCharacterGreater(currentRomanChar, previousRomanChar)) {
+                        result += ROMAN_TO_INT_MAP.get(currentRomanChar) - 2 * ROMAN_TO_INT_MAP.get(previousRomanChar);
+                    }
+                } else {
+                    result += ROMAN_TO_INT_MAP.get(currentRomanChar);
                 }
-            } else {
-                result += ROMAN_TO_INT_MAP.get(currentRomanChar);
+            } catch (NullPointerException exception) {
+                System.out.println("Invalid roman character found: " + currentRomanChar);
+                throw new IllegalArgumentException(String.format("Roman character %s is not allowed. Characters allowed are: ['M','D','C','L','X','V','I']", currentRomanChar));
+            } catch (Exception exception) {
+                System.out.println("Unexpected error occurred while converting roman to integer: " + exception.getMessage());
+                throw exception;
             }
         }
 
         return result;
+    }
+
+    private static boolean isRomanCharacterGreater(char a, char b) {
+        return ROMAN_TO_INT_MAP.get(a) > ROMAN_TO_INT_MAP.get(b);
     }
 }
