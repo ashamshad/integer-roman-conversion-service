@@ -25,10 +25,14 @@ public class ConversionService {
     }
 
     public String integerToRoman(int number) {
-        int l =  map.floorKey(number);
-        if ( number == l ) {
+        // Returns the greatest key less than or equal to the given key
+        int floor = map.floorKey(number);
+        if (number == floor) {
+            // We've reached the end of the number to convert, so we get out of the recursive loop and return the String
             return map.get(number);
         }
-        return map.get(l) + integerToRoman(number-l);
+
+        // There's still a leftover to convert, so recursively calling the function by subtracting the key found in map
+        return map.get(floor) + integerToRoman(number-floor);
     }
 }

@@ -7,15 +7,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class ConversionServiceTest {
 
     @Test
-    public void integerToRoman_nominal_returnsRoman() {
+    public void integerToRoman_singleDigit_returnsRoman() {
         //GIVEN
-        int testInt = 10;
+        int testInt = 1;
 
         //WHEN
         ConversionService conversionService = new ConversionService();
         String roman = conversionService.integerToRoman(testInt);
 
         //THEN
-        assertEquals("roman", roman);
+        assertEquals("I", roman);
     }
 }
