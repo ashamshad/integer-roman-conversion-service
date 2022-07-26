@@ -23,4 +23,31 @@ class RomanToIntegerConverterTest {
                 exception.getMessage()
         );
     }
+
+    @Test
+    public void convert_singleRomanCharacter_returnsConvertedInt() {
+        //GIVEN
+        String testRomanValue = "M";
+
+        //WHEN
+        RomanToIntegerConverter converter = new RomanToIntegerConverter();
+        Integer integer = converter.convert(testRomanValue);
+
+        //THEN
+        assertEquals(1000, integer);
+    }
+
+    @Test
+    public void convert_twoRomanCharacters_returnsConvertedInt() {
+        //GIVEN
+        String testRomanValue = "DC";
+
+        //WHEN
+        RomanToIntegerConverter converter = new RomanToIntegerConverter();
+        Integer integer = converter.convert(testRomanValue);
+
+        //THEN
+        assertEquals(600, integer);
+    }
+    
 }

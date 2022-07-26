@@ -28,12 +28,9 @@ public class RomanToIntegerConverter implements Converter<String, Integer> {
             char currentRomanChar = roman.charAt(i);
 
             try {
-                if (i > 0) {
-                    char previousRomanChar = roman.charAt(i);
-                    // If the previous character is greater than the current one
-                    if (isRomanCharacterGreater(currentRomanChar, previousRomanChar)) {
-                        result += ROMAN_TO_INT_MAP.get(currentRomanChar) - 2 * ROMAN_TO_INT_MAP.get(previousRomanChar);
-                    }
+                // If current roman character value is greater than the previous one
+                if (i > 0 && isRomanCharacterGreater(currentRomanChar, roman.charAt(i-1))) {
+                    result += ROMAN_TO_INT_MAP.get(currentRomanChar) - 2 * ROMAN_TO_INT_MAP.get(roman.charAt(i-1));
                 } else {
                     result += ROMAN_TO_INT_MAP.get(currentRomanChar);
                 }
