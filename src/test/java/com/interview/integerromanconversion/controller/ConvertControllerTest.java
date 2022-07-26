@@ -1,6 +1,6 @@
 package com.interview.integerromanconversion.controller;
 
-import com.interview.integerromanconversion.service.ConversionService;
+import com.interview.integerromanconversion.service.IntegerToRomanConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -25,16 +25,16 @@ public class ConvertControllerTest {
     private MockMvc mvc;
 
     @MockBean
-    private ConversionService conversionService;
+    private IntegerToRomanConverter integerToRomanConverter;
 
     @BeforeEach
     public void clear() {
-        Mockito.reset(conversionService);
+        Mockito.reset(integerToRomanConverter);
     }
 
     @Test
     public void convertInteger_nominalScenario_returnsConvertedInteger() throws Exception {
-        when(conversionService.integerToRoman(10)).thenReturn("converted");
+        when(integerToRomanConverter.convert(10)).thenReturn("converted");
         mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=10").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("converted")));

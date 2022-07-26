@@ -1,11 +1,12 @@
 package com.interview.integerromanconversion.service;
 
+import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
 import java.util.TreeMap;
 
 @Service
-public class ConversionService {
+public class IntegerToRomanConverter implements Converter<Integer, String> {
 
     private final static TreeMap<Integer, String> map = new TreeMap<>();
     static {
@@ -24,7 +25,7 @@ public class ConversionService {
         map.put(1, "I");
     }
 
-    public String integerToRoman(int number) {
+    public String convert(Integer number) {
         // Returns the greatest key less than or equal to the given key
         int floor = map.floorKey(number);
         if (number == floor) {
@@ -33,6 +34,6 @@ public class ConversionService {
         }
 
         // There's still a leftover to convert, so recursively calling the function by subtracting the key found in map
-        return map.get(floor) + integerToRoman(number-floor);
+        return map.get(floor) + convert(number-floor);
     }
 }

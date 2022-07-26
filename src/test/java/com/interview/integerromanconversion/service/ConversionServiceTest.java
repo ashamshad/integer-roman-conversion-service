@@ -12,8 +12,8 @@ class ConversionServiceTest {
         int testInt = 1;
 
         //WHEN
-        ConversionService conversionService = new ConversionService();
-        String roman = conversionService.integerToRoman(testInt);
+        IntegerToRomanConverter integerToRomanConverter = new IntegerToRomanConverter();
+        String roman = integerToRomanConverter.convert(testInt);
 
         //THEN
         assertEquals("I", roman);
@@ -25,8 +25,8 @@ class ConversionServiceTest {
         int testInt = 13;
 
         //WHEN
-        ConversionService conversionService = new ConversionService();
-        String roman = conversionService.integerToRoman(testInt);
+        IntegerToRomanConverter integerToRomanConverter = new IntegerToRomanConverter();
+        String roman = integerToRomanConverter.convert(testInt);
 
         //THEN
         assertEquals("XIII", roman);
@@ -38,8 +38,8 @@ class ConversionServiceTest {
         int testInt = 125;
 
         //WHEN
-        ConversionService conversionService = new ConversionService();
-        String roman = conversionService.integerToRoman(testInt);
+        IntegerToRomanConverter integerToRomanConverter = new IntegerToRomanConverter();
+        String roman = integerToRomanConverter.convert(testInt);
 
         //THEN
         assertEquals("CXXV", roman);
@@ -51,8 +51,8 @@ class ConversionServiceTest {
         int testInt = 1234;
 
         //WHEN
-        ConversionService conversionService = new ConversionService();
-        String roman = conversionService.integerToRoman(testInt);
+        IntegerToRomanConverter integerToRomanConverter = new IntegerToRomanConverter();
+        String roman = integerToRomanConverter.convert(testInt);
 
         //THEN
         assertEquals("MCCXXXIV", roman);
@@ -64,10 +64,19 @@ class ConversionServiceTest {
         int testInt = 3999;
 
         //WHEN
-        ConversionService conversionService = new ConversionService();
-        String roman = conversionService.integerToRoman(testInt);
+        IntegerToRomanConverter integerToRomanConverter = new IntegerToRomanConverter();
+        String roman = integerToRomanConverter.convert(testInt);
 
         //THEN
         assertEquals("MMMCMXCIX", roman);
+    }
+
+    @Test
+    public void romanToInteger_() {
+        //GIVEN
+
+        //WHEN
+
+        //THEN
     }
 }
