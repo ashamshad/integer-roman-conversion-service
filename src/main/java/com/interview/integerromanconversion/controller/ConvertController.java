@@ -31,6 +31,7 @@ public class ConvertController {
 	@PostMapping("/convert/roman")
 	public ConvertResponse convertRoman(@RequestParam String text) {
 		System.out.println(text + " to be converted");
-		return new ConvertResponse("0");
+		Integer convertedInteger = this.romanToIntegerConverter.convert(text);
+		return new ConvertResponse(String.valueOf(convertedInteger));
 	}
 }
