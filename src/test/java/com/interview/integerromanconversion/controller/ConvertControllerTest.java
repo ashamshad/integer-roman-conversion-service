@@ -1,5 +1,6 @@
 package com.interview.integerromanconversion.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interview.integerromanconversion.service.IntegerToRomanConverter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -26,6 +29,9 @@ public class ConvertControllerTest {
 
     @MockBean
     private IntegerToRomanConverter integerToRomanConverter;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @BeforeEach
     public void clear() {
@@ -44,5 +50,12 @@ public class ConvertControllerTest {
     public void convertInteger_missingIntegerRequestParameter_returnsError() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/convert/integer").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void convertRoman_nominalScenario_returnsConvertedRoman() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=10").accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.result", equalTo("0")));
     }
 }
