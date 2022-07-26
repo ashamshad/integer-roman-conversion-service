@@ -57,4 +57,17 @@ class ConversionServiceTest {
         //THEN
         assertEquals("MCCXXXIV", roman);
     }
+
+    @Test
+    public void integerToRoman_testingMaxRomanNumber_returnsRoman() {
+        //GIVEN
+        int testInt = 3999;
+
+        //WHEN
+        ConversionService conversionService = new ConversionService();
+        String roman = conversionService.integerToRoman(testInt);
+
+        //THEN
+        assertEquals("MMMCMXCIX", roman);
+    }
 }
