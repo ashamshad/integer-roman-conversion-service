@@ -23,4 +23,8 @@ public class ConverterService {
     public String convertIntegerToRoman(Integer integer) {
         return "";
     }
+
+    public Integer convertRomanToInteger(String roman) {
+        return 0;
+    }
 }

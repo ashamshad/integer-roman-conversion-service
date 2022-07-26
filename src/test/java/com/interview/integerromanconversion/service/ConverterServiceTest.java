@@ -29,4 +29,17 @@ class ConverterServiceTest {
         //THEN
         assertEquals("", result);
     }
+
+    @Test
+    public void convertRomanToInteger_nominal_returnsInteger() {
+        //GIVEN
+        String testRomanValue = "roman";
+
+        //WHEN
+        ConverterService converterService = new ConverterService(integerToRomanConverter, romanToIntegerConverter);
+        Integer result = converterService.convertRomanToInteger(testRomanValue);
+
+        //THEN
+        assertEquals(0, result);
+    }
 }
