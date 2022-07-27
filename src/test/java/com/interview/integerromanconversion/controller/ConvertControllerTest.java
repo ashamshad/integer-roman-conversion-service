@@ -65,7 +65,7 @@ public class ConvertControllerTest {
     }
 
     @Test
-    public void convertInteger_invalidInteger_returnsError() throws Exception {
+    public void convertInteger_invalidIntegerExceedingMaxValue_returnsError() throws Exception {
         mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=1000000")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON))
