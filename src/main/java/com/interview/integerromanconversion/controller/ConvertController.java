@@ -13,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -41,8 +40,8 @@ public class ConvertController {
 		return this.integerToRomanConverter.convert(Integer.valueOf(request.getInteger()));
 	}
 
-	@PostMapping("/convert/roman")
-	public ConvertResponse convertRoman(@RequestParam @Valid ConvertRomanRequest request) {
+	@PostMapping(value = "/convert/roman", consumes = {MediaType.APPLICATION_JSON_VALUE})
+	public ConvertResponse convertRoman(@RequestBody @Valid ConvertRomanRequest request) {
 		logger.info(request.getRoman() + " to be converted");
 		Integer convertedInteger = this.romanToIntegerConverter.convert(request.getRoman());
 		return new ConvertResponse(String.valueOf(convertedInteger));
