@@ -25,6 +25,8 @@ public class RomanToIntegerConverter implements Converter<String, Integer> {
     }
 
     public Integer convert(String roman) {
+        logger.info("Converting {} to integer", roman);
+
         int result = 0;
 
         for (int i = 0; i < roman.length(); i++) {
@@ -47,6 +49,7 @@ public class RomanToIntegerConverter implements Converter<String, Integer> {
             }
         }
 
+        logger.info("Converted {} to {}", roman, result);
         return result;
     }
 

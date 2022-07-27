@@ -34,6 +34,6 @@ public class IntegerToRomanConverter implements Converter<Integer, String> {
         }
 
         // There's still a leftover to convert, so recursively calling the function by subtracting the key found in map
-        return INTEGER_ROMAN_MAP.get(floor) + convert(number-floor);
+        return INTEGER_ROMAN_MAP.get(floor) + convert(number - floor);
     }
 }

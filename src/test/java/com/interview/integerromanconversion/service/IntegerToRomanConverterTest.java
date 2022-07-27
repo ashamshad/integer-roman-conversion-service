@@ -3,6 +3,9 @@ package com.interview.integerromanconversion.service;
 import com.interview.integerromanconversion.converter.IntegerToRomanConverter;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class IntegerToRomanConverterTest {
@@ -66,7 +69,10 @@ class IntegerToRomanConverterTest {
 
         //WHEN
         IntegerToRomanConverter integerToRomanConverter = new IntegerToRomanConverter();
+        Instant start = Instant.now();
         String roman = integerToRomanConverter.convert(testInt);
+        Instant finish = Instant.now();
+        System.out.println("Done in :" + (Duration.between(start, finish)));
 
         //THEN
         assertEquals("MMMCMXCIX", roman);
