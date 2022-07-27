@@ -3,6 +3,7 @@ package com.interview.integerromanconversion.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.interview.integerromanconversion.converter.IntegerToRomanConverter;
 import com.interview.integerromanconversion.converter.RomanToIntegerConverter;
+import com.interview.integerromanconversion.domain.ConvertIntegerRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -45,20 +46,28 @@ public class ConvertControllerTest {
     @Test
     public void convertInteger_nominalScenario_returnsConvertedInteger() throws Exception {
         when(integerToRomanConverter.convert(10)).thenReturn("converted");
-        mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=10").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders
+                        .post("/convert/integer")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(new ConvertIntegerRequest(10))))
                 .andExpect(status().isOk())
                 .andExpect(content().string(equalTo("converted")));
     }
 
     @Test
     public void convertInteger_missingIntegerRequestParameter_returnsError() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/convert/integer").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.post("/convert/integer")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
     @Test
     public void convertInteger_invalidInteger_returnsError() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=1000000").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.post("/convert/integer?integer=1000000")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest());
     }
 
@@ -77,7 +86,9 @@ public class ConvertControllerTest {
     @Test
     public void convertRoman_nominalScenario_returnsConvertedRoman() throws Exception {
         when(romanToIntegerConverter.convert("M")).thenReturn(0);
-        mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=M").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.post("/convert/roman?text=M")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.result", is("0")));
     }
